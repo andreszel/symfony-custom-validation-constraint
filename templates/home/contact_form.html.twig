@@ -10,8 +10,12 @@
     {% endfor %}
 
     {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
-        {{ form_widget(form) }}
+        {{ form_row(form.name) }}
+        {{ form_row(form.email) }}
+        {{ form_row(form.phone) }}
+        {{ form_row(form.password) }}
+        {{ form_row(form.message) }}
+        {{ form_widget(form.send) }}
+        <a href="{{ path('app_home') }}" class="btn btn-success float-end"><i class="fa-solid fa-house"></i> Homepage</a>
     {{ form_end(form) }}
-
-    <a href="{{ path('app_home') }}" class="btn btn-success">Homepage</a>
 {% endblock %}

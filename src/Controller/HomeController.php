@@ -54,7 +54,13 @@ class HomeController extends AbstractController
                     'placeholder' => 'Wpisz swoją wiadomość'
                 ]
             ])
-            ->add('send', SubmitType::class)
+            ->add('send', SubmitType::class, [
+                'label' => '<i class="fa-solid fa-envelopes-bulk"></i> Wyślij formularz',
+                'attr' => [
+                    'class' => 'btn btn-primary'
+                ],
+                'label_html' => true
+            ])
             ->getForm();
 
         $form->handleRequest($request);
@@ -69,7 +75,7 @@ class HomeController extends AbstractController
         }
 
         return $this->render('home/contact_form.html.twig', [
-            'form' => $form->createView()
+            'form' => $form
         ]);
     }
 }

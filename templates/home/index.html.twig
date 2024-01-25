@@ -1,7 +1,9 @@
 {% extends "base.html.twig" %}
 
 {% block body %}
-    <h1>Homepage!</h1>
+    <div class="container-fluid text-center p-4">
+        <h1 class="px-5 mb-5">Homepage!</h1>
 
-    <a href="{{ path('app_contact_form') }}" class="btn btn-success">Contact Form</a>
+        <a href="{{ path('app_contact_form') }}" class="btn btn-success p-2"><i class="fa-solid fa-envelopes-bulk"></i> Contact Form</a>
+    </div>
 {% endblock %}
