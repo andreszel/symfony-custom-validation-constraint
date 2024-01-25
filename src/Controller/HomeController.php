@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Validator\StronaPassword;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -31,7 +32,11 @@ class HomeController extends AbstractController
             ->add('name', TextType::class)
             ->add('email', EmailType::class)
             ->add('phone', TelType::class)
-            ->add('password', PasswordType::class)
+            ->add('password', PasswordType::class, [
+                'constraints' => [
+                    new StronaPassword()
+                ]
+            ])
             ->add('message', TextareaType::class)
             ->add('send', SubmitType::class)
             ->getForm();
@@ -44,7 +49,7 @@ class HomeController extends AbstractController
 
             dump($data);
 
-            $this->redirect('app_home');
+            $this->redirectToRoute('app_home');
         }
 
         return $this->render('home/contact_form.html.twig', [
