@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Validator\MobilePhone;
 use App\Validator\StrongPassword;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
@@ -32,13 +33,20 @@ class HomeController extends AbstractController
         $form = $this->createFormBuilder()
             ->add('name', TextType::class)
             ->add('email', EmailType::class)
-            ->add('phone', TelType::class)
+            ->add('phone', TelType::class, [
+                'constraints' => [
+                    new NotBlank([
+                        'message' => 'Please enter a phone number'
+                    ]),
+                    new MobilePhone(),
+                ]
+            ])
             ->add('password', PasswordType::class, [
                 'constraints' => [
                     new NotBlank([
                         'message' => 'Please enter a password'
                     ]),
-                    new StrongPassword()
+                    new StrongPassword(),
                 ]
             ])
             ->add('message', TextareaType::class, [
@@ -61,7 +69,7 @@ class HomeController extends AbstractController
         }
 
         return $this->render('home/contact_form.html.twig', [
-            'form' => $form
+            'form' => $form->createView()
         ]);
     }
 }
