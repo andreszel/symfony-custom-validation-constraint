@@ -65,7 +65,7 @@ class HomeController extends AbstractController
 
             $this->addFlash('success', 'Dane przesłane z formularza przeszły walidację!');
 
-            $this->redirectToRoute('app_home');
+            return $this->redirectToRoute('app_contact_form');
         }
 
         return $this->render('home/contact_form.html.twig', [
