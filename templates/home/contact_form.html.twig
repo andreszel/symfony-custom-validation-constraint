@@ -10,10 +10,6 @@
     {% endfor %}
 
     {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
-        <div class="my-custom-class-for-errors">
-            {{ form_errors(form) }}
-        </div>
-
         {{ form_widget(form) }}
     {{ form_end(form) }}
 
