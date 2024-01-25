@@ -3,6 +3,12 @@
 {% block body %}
     <h1>Contact Form!</h1>
 
+    {% for message in app.flashes('success') %}
+        <div class="alert alert-success">
+            {{ message }}
+        </div>
+    {% endfor %}
+
     {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
         <div class="my-custom-class-for-errors">
             {{ form_errors(form) }}

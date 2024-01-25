@@ -2,7 +2,7 @@
 
 namespace App\Controller;
 
-use App\Validator\StronaPassword;
+use App\Validator\StrongPassword;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
@@ -14,6 +14,7 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Component\Validator\Constraints\NotBlank;
 
 class HomeController extends AbstractController
 {
@@ -26,18 +27,25 @@ class HomeController extends AbstractController
     #[Route('/contact-form', 'app_contact_form')]
     public function contactForm(Request $request): Response
     {
-        $defaultData = ['message' => 'Wpisz treść'];
+        //$defaultData = ['message' => 'Wpisz treść'];
 
-        $form = $this->createFormBuilder($defaultData)
+        $form = $this->createFormBuilder()
             ->add('name', TextType::class)
             ->add('email', EmailType::class)
             ->add('phone', TelType::class)
             ->add('password', PasswordType::class, [
                 'constraints' => [
-                    new StronaPassword()
+                    new NotBlank([
+                        'message' => 'Please enter a password'
+                    ]),
+                    new StrongPassword()
                 ]
             ])
-            ->add('message', TextareaType::class)
+            ->add('message', TextareaType::class, [
+                'attr' => [
+                    'placeholder' => 'Wpisz swoją wiadomość'
+                ]
+            ])
             ->add('send', SubmitType::class)
             ->getForm();
 
@@ -47,7 +55,7 @@ class HomeController extends AbstractController
             // data is an array with "name", "email", and "message" keys
             $data = $form->getData();
 
-            dump($data);
+            $this->addFlash('success', 'Dane przesłane z formularza przeszły walidację!');
 
             $this->redirectToRoute('app_home');
         }

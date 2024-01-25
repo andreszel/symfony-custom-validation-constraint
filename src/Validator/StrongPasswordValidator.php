@@ -6,12 +6,12 @@ use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
-class StronaPasswordValidator extends ConstraintValidator
+class StrongPasswordValidator extends ConstraintValidator
 {
-    public function validate($value, Constraint $constraint)
+    public function validate(mixed $value, Constraint $constraint)
     {
-        if (!$constraint instanceof StronaPassword) {
-            throw new UnexpectedTypeException($constraint, StronaPassword::class);
+        if (!$constraint instanceof StrongPassword) {
+            throw new UnexpectedTypeException($constraint, StrongPassword::class);
         }
 
         if (null === $value || '' === $value) {
