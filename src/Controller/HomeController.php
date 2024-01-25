@@ -7,6 +7,7 @@ use App\Validator\StrongPassword;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Form\Extension\Core\Type\EmailType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\ResetType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TelType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
@@ -59,7 +60,14 @@ class HomeController extends AbstractController
                 'attr' => [
                     'class' => 'btn btn-primary'
                 ],
-                'label_html' => true
+                'label_html' => true,
+            ])
+            ->add('reset', ResetType::class, [
+                'label' => '<i class="fa-solid fa-broom"></i> Reset',
+                'attr' => [
+                    'class' => 'btn btn-secondary'
+                ],
+                'label_html' => true,
             ])
             ->getForm();
 
