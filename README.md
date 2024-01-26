@@ -1,3 +1,6 @@
-Test Symfony custom validation constraint.
+Test Symfony custom validation constraints:
+- StrongPassword
+- MobilePhone
 
-Use constraint in form without class
+Constraints in form without Entity class.
+
