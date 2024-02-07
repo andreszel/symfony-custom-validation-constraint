@@ -29,7 +29,10 @@ class HomeController extends AbstractController
     #[Route('/contact-form', 'app_contact_form')]
     public function contactForm(Request $request): Response
     {
-        //$defaultData = ['message' => 'Wpisz treść'];
+        /* $defaultData = [
+            'name' => 'Janusz',
+            'message' => 'Wpisz treść'
+        ]; */
 
         $form = $this->createFormBuilder()
             ->add('name', TextType::class)
