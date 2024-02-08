@@ -5,10 +5,11 @@ namespace App\Validator;
 use Symfony\Component\Validator\Constraint;
 use Symfony\Component\Validator\ConstraintValidator;
 use Symfony\Component\Validator\Exception\UnexpectedTypeException;
+use Symfony\Component\Validator\Exception\UnexpectedValueException;
 
 class StrongPasswordValidator extends ConstraintValidator
 {
-    public function validate(mixed $value, Constraint $constraint)
+    public function validate(mixed $value, Constraint $constraint): void
     {
         if (!$constraint instanceof StrongPassword) {
             throw new UnexpectedTypeException($constraint, StrongPassword::class);
@@ -19,7 +20,7 @@ class StrongPasswordValidator extends ConstraintValidator
         }
 
         if(!\is_string($value)) {
-            throw new UnexpectedTypeException($value, 'string');
+            throw new UnexpectedValueException($value, 'string');
         }
 
         // min 8 znaków, przynajmniej 1 wielka, 1 mała, 1 cyfra i 1 znak specjalny

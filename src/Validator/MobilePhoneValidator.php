@@ -8,7 +8,7 @@ use Symfony\Component\Validator\Exception\UnexpectedTypeException;
 
 class MobilePhoneValidator extends ConstraintValidator
 {
-    public function validate($value, Constraint $constraint)
+    public function validate($value, Constraint $constraint): void
     {
         if (!$constraint instanceof MobilePhone) {
             throw new UnexpectedTypeException($constraint, MobilePhone::class);
